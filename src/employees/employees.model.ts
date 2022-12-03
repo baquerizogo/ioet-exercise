@@ -4,3 +4,9 @@ export interface Employee {
     name: string,
     workdays: Workday[],
 }
+
+export interface Pair {
+    names: string[],
+    namesOutput: string,
+    coincidenceCount: number,
+}

@@ -1,5 +1,5 @@
 import { Employee } from "./employees/employees.model";
-import { parseEmployeesData } from "./employees/employees.service";
+import { calculateMatchedEmployees, parseEmployeesData } from "./employees/employees.service";
 import { promptFilename, readInputFile } from "./utils/prompt";
 
 const index = async () => {
@@ -9,9 +9,11 @@ const index = async () => {
         
         if(typeof rawInputData === 'string') {
             const employees: Employee[] | undefined = parseEmployeesData(rawInputData);
-            const matchedEmployees = '';
+            
             if(typeof employees != 'undefined') {
-                console.log(employees[0]);
+                const matchedEmployees = calculateMatchedEmployees(employees);
+                
+                console.table(matchedEmployees, ["namesOutput", "coincidenceCount"]);    
             }
         }
         
