@@ -22,12 +22,21 @@ export const parseEmployeeWorkdays = (employeeRawWorkdays: string): Workday[] =>
     let workdays: Workday[] = [];
 
     employeeRawWorkdays.split(',').forEach((workday) => {
-        const day = workday.substring(0, 2);
-        const hours = workday.substring(2);
+        const timeRegex: RegExp = new RegExp('^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$')
+        const day: string = workday.substring(0, 2);
+        const hours: string = workday.substring(2);
+
+        const rawEntryHour = hours.split('-')[0];
+        const rawDepartureHour = hours.split('-')[1];
         const entryHour = parseInt(hours.split('-')[0].replace(':', '') , 10);
         const departureHour = parseInt(hours.split('-')[1].replace(':', ''), 10);
 
-        if( isDay(day) && areHoursValid(entryHour, departureHour)) {
+        if( 
+            isDay(day) && 
+            areHoursValid(entryHour, departureHour) && 
+            timeRegex.test(rawEntryHour) && 
+            timeRegex.test(rawDepartureHour)
+        ) {
             workdays.push({day, hours, entryHour, departureHour});
         } else {
             throw new Error();
