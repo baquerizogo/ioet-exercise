@@ -28,8 +28,8 @@ export const parseEmployeeWorkdays = (employeeRawWorkdays: string): Workday[] =>
 
         const rawEntryHour = hours.split('-')[0];
         const rawDepartureHour = hours.split('-')[1];
-        const entryHour = parseInt(hours.split('-')[0].replace(':', '') , 10);
-        const departureHour = parseInt(hours.split('-')[1].replace(':', ''), 10);
+        const entryHour = parseInt(rawEntryHour.replace(':', '') , 10);
+        const departureHour = parseInt(rawDepartureHour.replace(':', ''), 10);
 
         if( 
             isDay(day) && 
