@@ -1,9 +1,11 @@
-import { areHoursValid } from "../workdays/workday.service";
+import { parseEmployeesData } from "./employees.service";
 
-test('Return false if entry and departure hour are inverted', () => {
-    expect(areHoursValid(1800, 1400)).toBeFalsy();
-})
+test('Throw error if raw data is empty', () => {
+    expect(() => parseEmployeesData('')).toThrow("Wrong data format. Please check your data and try again.");
+});
 
-test('Return false if entry or departure hour are not time values', () => {
-    expect(areHoursValid(2700, 3400)).toBeFalsy();
-})
+test('Throw error if raw data is invalid', () => {
+    const str = "RENEMO10:00-12:00,dedede"
+    
+    expect(() => parseEmployeesData(str)).toThrow("Wrong data format. Please check your data and try again.");
+});
