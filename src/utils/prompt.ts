@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 export const promptFilename = async () => {
     return new Promise<string>(( resolve, reject ) => {
         rl.question("Please enter filename [ex:'data.txt']: ", (ans:string) => {
-            if(!ans) reject(new Error("Please enter a valid filename."));
+            if(!ans) reject("Please enter a valid filename and try again.");
             
             rl.close();
             resolve(ans);
@@ -23,10 +23,9 @@ export const promptFilename = async () => {
 
 export const readInputFile = (filename: string):string | undefined => {
     try {
-        console.log(__dirname)
         const result:string = readFileSync(filename, 'utf-8');
         return result;
     } catch(error) {
-        throw new Error("File not found");
+        throw "File not found. Please check the filename and try again.";
     }
 };

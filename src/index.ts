@@ -1,4 +1,5 @@
-import { formatData } from "./employees/employees.service";
+import { Employee } from "./employees/employees.model";
+import { parseEmployeesData } from "./employees/employees.service";
 import { promptFilename, readInputFile } from "./utils/prompt";
 
 const index = async () => {
@@ -7,15 +8,15 @@ const index = async () => {
         const rawInputData:string | undefined = readInputFile(`public/assets/${filename}`);
         
         if(typeof rawInputData === 'string') {
-            const FormattedData = formatData(rawInputData);
-            
-            if(typeof FormattedData != 'undefined') {
-                console.log(FormattedData[0]);
+            const employees: Employee[] | undefined = parseEmployeesData(rawInputData);
+            const matchedEmployees = '';
+            if(typeof employees != 'undefined') {
+                console.log(employees[0]);
             }
         }
         
     } catch(error) {
-        console.error(error);
+        console.log(error);
         console.log("Finishing app...")
         process.exit();
     }
