@@ -1,7 +1,7 @@
-import { readInputFile } from "./index.service";
+import { readInputFile } from "./prompt";
 
 test('Return a string with raw data from .txt file', () => {
-    const result = readInputFile('../public/assets/data.txt');
+    const result = readInputFile('public/assets/data.txt');
     expect(typeof result).toBe('string');
 });
 

@@ -1,31 +1,11 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { Days, Employee } from "./employees.model";
 
-export const readInputFile = (filename: string):string | undefined => {
-    try {
-        const result:string = readFileSync(join(__dirname, filename), 'utf-8');
-        return result;
-    } catch(error) {
-        throw new Error("File not found");
-    }
-};
+export const isDay = (day:string): day is Days => {
+    return ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'].indexOf(day) !== -1;
+}
 
-export const formatData = (rawInputData:string):{
-    name:string, 
-    workdays:{
-        date: string, 
-        entryHour: string, 
-        departureHour: string
-    }[]
-}[] | undefined => {
-    const employees: {
-        name:string, 
-        workdays:{
-            date: string, 
-            entryHour: string, 
-            departureHour: string
-        }[]
-    }[] = [];
+export const formatData = (rawInputData:string): Employee[] | undefined => {
+    const employees: Employee[] = [];
 
     try {
         const rawData:string[] = rawInputData.split('\n');
@@ -34,7 +14,7 @@ export const formatData = (rawInputData:string):{
             let employeeName: string = '';
             let employeeRawWorkdays: string = '';
             let employeeWorkdays: {
-                date: string, 
+                day: Days, 
                 entryHour: string, 
                 departureHour: string
             }[] = [];
@@ -45,14 +25,19 @@ export const formatData = (rawInputData:string):{
             employeeRawWorkdays = str.split('=')[1];
             
             employeeRawWorkdays.split(',').forEach((workday) => {
-                const date = workday.substring(0, 2);
+                const day = workday.substring(0, 2);
                 const hours = workday.substring(2);
                 const entryHour = hours.split('-')[0];
                 const departureHour = hours.split('-')[1];
-                
-                employeeWorkdays.push({date, entryHour, departureHour});
-            });
 
+                if(isDay(day)) {
+                    console.log(isDay(day));
+                    employeeWorkdays.push({day, entryHour, departureHour});
+                } else {
+                    throw new Error('Days structure is not valid');
+                }
+            });
+            
             employees.push({name: employeeName, workdays: employeeWorkdays});
         })
 

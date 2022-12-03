@@ -1,5 +1,5 @@
 const text = "Hola Mundo";
 
-test('Test 0: Jest funcionando correctamente', ()=>{
+test('Jest is working correctly', () => {
     expect(text).toMatch(/Mundo/);
 })

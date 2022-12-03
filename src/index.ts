@@ -1,10 +1,10 @@
-import { formatData, readInputFile } from "./index.service";
-import { promptFilename } from "./utils/prompt";
+import { formatData } from "./employees/employees.service";
+import { promptFilename, readInputFile } from "./utils/prompt";
 
 const index = async () => {
     try {
         const filename:string = await promptFilename();
-        const rawInputData:string | undefined = readInputFile(`../public/assets/${filename}`);
+        const rawInputData:string | undefined = readInputFile(`public/assets/${filename}`);
         
         if(typeof rawInputData === 'string') {
             const FormattedData = formatData(rawInputData);
