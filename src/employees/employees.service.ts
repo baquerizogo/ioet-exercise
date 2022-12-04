@@ -24,44 +24,17 @@ export const parseEmployeesData = (rawInputData: string): Employee[] | undefined
     }
 }
 
-export const calculateMatchedEmployees = (employees: Employee[]):Pair[] => {
+export const calculateMatchedEmployees = (employees: Employee[]): Pair[] => {
     const pairs: Pair[] = [];
 
     employees.forEach((employee) => {
         employees.forEach((auxEmployee) => {
-            let coincidenceCount: number = 0;
-            let flag: boolean = false;
-            let pairAlreadyExists: boolean = false;
+            if(employee.name === auxEmployee.name) return;
 
-            if(employee.name == auxEmployee.name) return; 
+            const coincidenceCount: number = checkCoincidences(employee, auxEmployee);
+            const pairAlreadyExists: boolean = checkIfPairAlreadyExists(pairs, employee.name, auxEmployee.name);
 
-            employee.workdays.forEach((workday) => {
-                const { entryHour, departureHour, day } = workday;
-
-                auxEmployee.workdays.forEach((auxWorkday) => {
-                    const { entryHour: auxEntryHour, departureHour: auxDepartureHour, day: auxDay } = auxWorkday;
-
-                    const case1: boolean = entryHour >= auxEntryHour && entryHour < auxDepartureHour;
-                    const case2: boolean = departureHour > auxEntryHour && departureHour <= auxDepartureHour;
-                    const case3: boolean = entryHour <= auxEntryHour && departureHour >= auxDepartureHour;
-                    const dayCoincidence: boolean = day === auxDay;
-                    
-                    if((case1 || case2 || case3) && dayCoincidence ) {
-                        flag = true;
-                        coincidenceCount = coincidenceCount + 1;
-                    }
-                
-                })
-            })
-
-            pairs.forEach((pair) => {
-                const includeEmployee = pair.names.includes(employee.name);
-                const includeAuxEmployee = pair.names.includes(auxEmployee.name);
-                
-                if( includeEmployee && includeAuxEmployee ) pairAlreadyExists = true;
-            })
-
-            if(flag && !pairAlreadyExists) {
+            if(coincidenceCount > 0 && !pairAlreadyExists) {
                 pairs.push({
                     names: [employee.name, auxEmployee.name],
                     namesOutput: `${employee.name}-${auxEmployee.name}`,
@@ -72,4 +45,41 @@ export const calculateMatchedEmployees = (employees: Employee[]):Pair[] => {
     });
 
     return pairs;
+}
+
+export const checkCoincidences = (employee: Employee, auxEmployee: Employee): number => {
+    let coincidenceCount: number = 0;
+
+    employee.workdays.forEach((workday) => {
+        const { entryHour, departureHour, day } = workday;
+
+        auxEmployee.workdays.forEach((auxWorkday) => {
+            const { entryHour: auxEntryHour, departureHour: auxDepartureHour, day: auxDay } = auxWorkday;
+
+            const case1: boolean = entryHour >= auxEntryHour && entryHour < auxDepartureHour;
+            const case2: boolean = departureHour > auxEntryHour && departureHour <= auxDepartureHour;
+            const case3: boolean = entryHour <= auxEntryHour && departureHour >= auxDepartureHour;
+            const dayCoincidence: boolean = day === auxDay;
+            
+            if((case1 || case2 || case3) && dayCoincidence ) {
+                coincidenceCount = coincidenceCount + 1;
+            }
+        
+        });
+    });
+
+    return coincidenceCount;
+}
+
+export const checkIfPairAlreadyExists = (pairs: Pair[], employeeName1: string, employeeName2: string): boolean => {
+    let pairAlreadyExists: boolean = false;
+
+    pairs.forEach((pair) => {
+        const includeEmployee = pair.names.includes(employeeName1);
+        const includeAuxEmployee = pair.names.includes(employeeName2);
+        
+        if( includeEmployee && includeAuxEmployee ) pairAlreadyExists = true;
+    });
+
+    return pairAlreadyExists;
 }
