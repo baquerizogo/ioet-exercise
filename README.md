@@ -93,6 +93,7 @@ For solving this challenge I followed the next steps:
  - Run the built app using node.
  `node dist`
 
+Once it starts running, you can pass the name of the .txt file in the prompt. These files should be located in public/assets/ 
 ## How to run the project in development mode
 - Run nodemon with the following command:
 `npm run dev`
