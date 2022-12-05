@@ -80,6 +80,9 @@ For solving this challenge I followed the next steps:
 ## How to run the project
  - Clone this repository. 
  `git clone https://github.com/baquerizogo/ioet-exercise.git`
+ 
+ - Move to the project's folder. 
+ `cd ioet-exercise/`
 
  - Install the dependencies.
  `npm install`
@@ -87,7 +90,7 @@ For solving this challenge I followed the next steps:
  - Build the app. This will run the TypeScript compiler and generate the dist folder.
 `npm run build`
 
- - Run the built app using node
+ - Run the built app using node.
  `node dist`
 
 ## How to run the project in development mode
