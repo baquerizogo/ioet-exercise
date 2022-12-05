@@ -25,7 +25,9 @@ _OUTPUT_
 RENE-ASTRID: 3
 
 ## Overview
-This exercise was solved as part of the Junior Software developer screening at Ioet. I used TypeScript for solving this challenge using a modular pattern and focused on TDD using Jest. 
+This exercise was solved as part of the Junior Software developer screening at Ioet. I used TypeScript for solving this challenge using a modular pattern and focused on TDD using Jest.
+
+There are three modules in this app: Employees, Workdays and utilities. Every module has its own functions, data models and tests since it's a clear way to structure the programming logic in Node projects and find the corresponding tests.
 
 The code also follows SOLID principles applied to Functional Programming like Single-Responsibility and interface segregation principles.
 
@@ -60,3 +62,13 @@ The code also follows SOLID principles applied to Functional Programming like Si
 ├── package.json
 └── package-lock.json
 ```
+## Solution
+For solving this challenge I followed the next steps:
+
+ 1. Read the user file.
+ 2. Parse the employees data into the right format.
+ 3. If the data is invalid then throw errors and finish the app.
+ 4. Parse the work days of each employee into the right format.
+ 5. Check if every work day has valid day, entry hour and departure hour else throw error and finish the app.
+ 6. Calculate pairs of employees checking if they match the day and the worked hours.
+ 7. Output the table in console in the required format. 
