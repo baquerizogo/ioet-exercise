@@ -72,3 +72,36 @@ For solving this challenge I followed the next steps:
  5. Check if every work day has valid day, entry hour and departure hour else throw error and finish the app.
  6. Calculate pairs of employees checking if they match the day and the worked hours.
  7. Output the table in console in the required format. 
+
+
+## Requirements
+ - Node v14.18.0 or later
+
+## How to run the project
+ - Clone this repository. 
+ `git clone https://github.com/baquerizogo/ioet-exercise.git`
+
+ - Install the dependencies.
+ `npm install`
+ 
+ - Build the app. This will run the TypeScript compiler and generate the dist folder.
+`npm run build`
+
+ - Run the built app using node
+ `node dist`
+
+## How to run the project in development mode
+- Run nodemon with the following command:
+`npm run dev`
+
+This will run nodemon and it will watch any change you made in src
+
+## How to test the app.
+This project uses Jest for Unit testing purposes. You can check each test in the corresponding .test.ts files.
+- Run jest
+`npm run test`
+or
+`npm run test:watch`
+
+- Run Jest Coverage. This will generate the coverage folder containing the report in HTML.
+`npm run test:coverage`
