@@ -1,10 +1,10 @@
 import { Days, Workday } from "./workday.model";
 
-export const isDay = (day:string): day is Days => {
+export const isDay = (day: string): day is Days => {
     return ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'].indexOf(day) !== -1;
 }
 
-export const areHoursValid = (entryHour:number, departureHour:number):boolean => {
+export const areHoursValid = (entryHour: number, departureHour: number): boolean => {
     const maxHour: number = 2359;
     const minHour: number = 0;
 

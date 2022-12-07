@@ -8,7 +8,7 @@ const rl = readline.createInterface({
     terminal: false
 });
 
-export const promptFilename = async () => {
+export const promptFilename = async (): Promise<string> => {
     return new Promise<string>(( resolve, reject ) => {
         rl.question("Please enter filename [ex:'data.txt']: ", (ans:string) => {
             if(!ans) reject("Please enter a valid filename and try again.");

@@ -5,7 +5,7 @@ export const parseEmployeesData = (rawInputData: string): Employee[] | undefined
     const employees: Employee[] = [];
 
     try {
-        const rawData:string[] = rawInputData.split('\n');
+        const rawData: string[] = rawInputData.split('\n');
 
         rawData.forEach((str) => {
             let employeeRawWorkdays: string = '';
