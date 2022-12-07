@@ -13,10 +13,15 @@ const index = async () => {
             if(typeof employees != 'undefined') {
                 const matchedEmployees: Pair[] = calculateMatchedEmployees(employees);
                 
+                if(matchedEmployees.length == 0) {
+                    console.log('No employee coincided in the office this time.');
+                    return;
+                }
+
                 console.table(matchedEmployees, ["namesOutput", "coincidenceCount"]);    
+                return;
             }
         }
-        
     } catch(error) {
         console.log(error);
         console.log("Finishing app...")
